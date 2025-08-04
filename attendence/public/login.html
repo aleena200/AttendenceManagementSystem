@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔐 Login</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .auth-container h2 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .auth-container input {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    .auth-container button {
+      width: 95%;
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .auth-container button:hover {
+      background-color: #2980b9;
+    }
+
+    .switch {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .switch a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .switch a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <h2>🔐 Login</h2>
+    <input id="loginEmail" placeholder="Email" required><br>
+    <input id="loginPassword" type="password" placeholder="Password" required><br>
+    <button onclick="login()">Login</button>
+    <div class="switch">
+      New user? <a href="signup.html">Sign up here</a>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

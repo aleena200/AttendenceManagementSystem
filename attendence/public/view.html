@@ -1,0 +1,138 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>All Students Attendance</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📄 Attendance Records (All Students)</h2>
+  <input id="searchInput" placeholder="Search by name or roll number" onkeyup="filterTable()"><br><br>
+  <table id="attendanceTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll Number</th>
+        <th>Attendance</th>
+      </tr>
+    </thead>
+    <tbody id="attendanceBody"></tbody>
+  </table>
+  <br>
+  <button onclick="back()">← Back</button>
+
+  <script src="js/view.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Attendance</title>
+ <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h2>📄 Attendance Records (Grouped by Date)</h2>
+  <div id="records"></div>
+  <br>
+  <button onclick="back()">← Back</button>
+
+  <script>
+    function back() {
+      window.location.href = 'dashboard.html';
+    }
+
+    function deleteStudent(rollNumber) {
+    if (!confirm("Are you sure you want to delete this student?")) return;
+    fetch(`/attendence/delete/${rollNumber}`, {
+      method: 'DELETE'
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to delete");
+      alert("✅ Student deleted successfully");
+      location.reload();
+    })
+    .catch(err => {
+      alert("❌ " + err.message);
+    });
+  }
+
+  function updateStatus(rollNumber, date) {
+  const select = document.getElementById(`status-${rollNumber}-${date}`);
+  const status = select.value;
+
+  fetch('/attendence/updateStatus', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ rollNumber, date, status })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Failed to update status");
+    alert("✅ Status updated successfully");
+    location.reload(); // reloads the view to reflect the new status
+  })
+  .catch(err => {
+    alert("❌ " + err.message);
+  });
+}
+
+
+
+    fetch('/attendence/groupedByDate')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('records');
+
+        for (const date in data) {
+          const heading = document.createElement('h3');
+          heading.textContent = `🗓️ ${date}`;
+          container.appendChild(heading);
+
+          const table = document.createElement('table');
+          const thead = document.createElement('thead');
+          thead.innerHTML = `
+            <tr>
+              <th>Name</th>
+              <th>Roll Number</th>
+              
+               <th>Actions</th>
+            </tr>`;
+          table.appendChild(thead);
+
+          const tbody = document.createElement('tbody');
+          data[date].forEach(record => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${record.name}</td>
+              <td>${record.rollNumber}</td>
+             
+             <td>
+      <select id="status-${record.rollNumber}-${date}">
+        <option value="Present" ${record.status === 'Present' ? 'selected' : ''}>Present</option>
+        <option value="Absent" ${record.status === 'Absent' ? 'selected' : ''}>Absent</option>
+      </select>
+    </td>
+    <td>
+      <button class="btn" onclick="updateStatus('${record.rollNumber}', '${date}')">✅ Update</button>
+      <button class="btn danger" onclick="deleteStudent('${record.rollNumber}')">🗑️ Delete</button>
+    </td>
+
+          `;
+            tbody.appendChild(row);
+          });
+
+          table.appendChild(tbody);
+          container.appendChild(table);
+        }
+      })
+      .catch(err => {
+        alert("❌ Failed to load attendance");
+        console.error(err);
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎓 Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dashboard-container {
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 30px;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .dashboard-container h2 {
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .dashboard-container button {
+      display: block;
+      width: 90%;
+      margin: 12px auto;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .dashboard-container button:hover {
+      background-color: #2980b9;
+    }
+
+    .dashboard-container button:last-child {
+      background-color: #e74c3c;
+    }
+
+    .dashboard-container button:last-child:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>🎓 Welcome to the Dashboard</h2>
+    <button onclick="goTo('view.html')">📄 View Attendance</button>
+    <button onclick="goTo('add.html')">➕ Add Student</button>
+    <button onclick="goTo('mark.html')">✅ Mark Attendance</button>
+    <button onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    function goTo(page) {
+      window.location.href = page;
+    }
+  </script>
+</body>
+</html>
