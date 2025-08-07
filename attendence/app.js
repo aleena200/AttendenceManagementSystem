@@ -7,7 +7,8 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 app.use(express.json());
-app.use(express.static('public'));
+//app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public'))); 
 
 app.get('/', (req, res) => {
   res.send('Attendance Management System API is working!');
