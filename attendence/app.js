@@ -11,13 +11,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public'))); 
 
 app.get('/', (req, res) => {
-  res.send('Attendance Management System API is working!');
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
 // Serve login page directly
-app.get('/login.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
-});
+// app.get('/login.html', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'login.html'));
+// });
 
 app.use('/attendence', attendenceRoutes);
 app.use('/auth', authRoutes);
