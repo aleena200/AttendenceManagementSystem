@@ -8,6 +8,10 @@ const attendenceRoutes = require('./routes/attendenceRoutes');
 
 const app = express();
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Attendance Management System API is working!');
+});
 app.use(express.static('public'));
 app.use('/attendence', attendenceRoutes);
 
