@@ -14,6 +14,11 @@ app.get('/', (req, res) => {
   res.send('Attendance Management System API is working!');
 });
 
+// Serve login page directly
+app.get('/login.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
 app.use('/attendence', attendenceRoutes);
 app.use('/auth', authRoutes);
 
