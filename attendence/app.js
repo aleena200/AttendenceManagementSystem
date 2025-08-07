@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const attendenceRoutes = require('./routes/attendenceRoutes');
 const authRoutes = require('./routes/authRoutes');
-
+const path = require('path');
 const app = express();
 app.use(express.json());
 //app.use(express.static('public'));
