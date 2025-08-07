@@ -24,4 +24,5 @@ mongoose.connect(process.env.MONGO_URI)
 
 const authRoutes = require('./routes/authRoutes');
 app.use('/auth', authRoutes);
+module.exports = app;
 
