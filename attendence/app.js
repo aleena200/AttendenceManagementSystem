@@ -1,7 +1,9 @@
 // app.js
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
+const connectDB = require('./db');
+
 const attendenceRoutes = require('./routes/attendenceRoutes');
 const authRoutes = require('./routes/authRoutes');
 const path = require('path');
@@ -23,9 +25,11 @@ app.use('/attendence', attendenceRoutes);
 app.use('/auth', authRoutes);
 
 // 🔁 Connect to DB (optional for serverless) — no app.listen()!
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ Connected to MongoDB Atlas'))
-  .catch((err) => console.error('❌ MongoDB error:', err));
+// mongoose.connect(process.env.MONGO_URI)
+//   .then(() => console.log('✅ Connected to MongoDB Atlas'))
+//   .catch((err) => console.error('❌ MongoDB error:', err));
+connectDB();
+
 
 // ✅ Export app for Vercel serverless
 module.exports = app;
